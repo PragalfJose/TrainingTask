@@ -6,8 +6,8 @@
 // Summary  : Write a program to familiar with coding standards and basic HIT 
 //            operations
 // Note     : Simple program to print hello world with multiple files in it
-// :
-// :
+//          :
+//          :
 //
 //*****************************************************************************
 #ifndef _PRINT_FUNCTIONS_H
@@ -16,15 +16,21 @@
 //******************************* Include Files *******************************
 #include <stdio.h>
 #include <stdint.h>
+#include <stdbool.h>
 
 //******************************* Global Types ********************************
+
 //***************************** Global Constants ******************************
+
 //***************************** Global Variables ******************************
+
 //**************************** Forward Declarations ***************************
+
 //***************************** Class Declaration *****************************
+
 //*********************** Inline Method Implementations ***********************
 
-extern void PrintString(uint8_t *ucInputString);
+bool PrintString(uint8_t *pucInputString);
 
 #endif // _PRINT_FUNCTIONS_H
 // EOF

@@ -1,3 +1,18 @@
+//**************************** TRAINIGTASK ******************************
+// Copyright (c) 2025 Trenser
+// All Rights Reserved
+//*****************************************************************************
+//
+// File     : main.c
+// Summary  : Program to familiar with coding standards and basic HIT operations
+// Note     : Simple program to print hello world with multiple file
+// Author   : Pragalf T Jose
+// Date     : 21/07/2025
+//
+//*****************************************************************************
+
+//******************************* Include Files *******************************
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
@@ -5,17 +20,29 @@
 
 #include "PrintFunction/PrintFunction.h"
 
+//******************************* Global Types ********************************
+
+//***************************** Global Constants ******************************
+
 #define STRING_SIZE 64
+
+//***************************** Global Variables ******************************
+
+//**************************** Forward Declarations ***************************
+
+//***************************** Class Declaration *****************************
+
+//*********************** Inline Method Implementations ***********************
 
 int main()
 {
     // variables decleared here
-    uint8_t ucInputString[STRING_SIZE];
+    uint8_t pucInputString[STRING_SIZE] = {0};
 
-    memset(ucInputString,0,sizeof(ucInputString));
+    memset(pucInputString, 0x00, sizeof(pucInputString));
     PrintString("Enter a string");
-    scanf("%64[^\n]s",ucInputString);
+    scanf("%64[^\n]s",pucInputString);
 
-    PrintString(ucInputString);
+    PrintString(pucInputString);
     return 0;
 }

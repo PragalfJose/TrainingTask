@@ -3,7 +3,7 @@
 // All Rights Reserved
 //*****************************************************************************
 //
-// File     : PrintFunction.cpp
+// File     : PrintFunction.c
 // Summary  : Write a program to familiar with coding standards and basic HIT 
 //            operations
 // Note     : Simple program to print hello world with multiple file
@@ -16,14 +16,33 @@
 #include "PrintFunction.h"
 
 //******************************* Local Types *********************************
+
 //***************************** Local Constants *******************************
+
 //***************************** Local Variables *******************************
+
 //****************************** Local Functions ******************************
+
 //*********************** Class Method Implementations ************************
 
-void PrintString(uint8_t *ucInputString)
+//******************************.PrintString.******************************
+//Purpose   : Print an input string
+//Inputs    : pucInputString - Input string to print
+//Outputs   : None
+//Return    : true - print success, false - invalid argument
+//Notes     : 
+//**********************************************************************************
+bool PrintString(uint8_t *pucInputString)
 {
-    printf("Input string is : %s\r\n",ucInputString);
+    bool blReturn = false;
+
+    if(pucInputString != NULL)
+    {
+        printf("Input string is : %s\r\n",pucInputString);
+        blReturn = true;
+    }
+
+    return blReturn;
 }
 
 // EOF
