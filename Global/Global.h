@@ -1,25 +1,18 @@
-//**************************** TRAINIGTASK ************************************
+//**************************** TRAININGTASK ***********************************
 // Copyright (c) 2025 Trenser
 // All Rights Reserved
 //*****************************************************************************
 //
-// File     : main.c
-// Summary  : Program to familiar with coding standards and basic HIT 
-//            operations
-// Note     : Simple program to print hello world with multiple file
-// Author   : Pragalf T Jose
-// Date     : 21/07/2025
+// Summary  : Include global definitions and declarations
+// Note     :
+//          :
+//          :
 //
 //*****************************************************************************
+#ifndef _GLOBAL_H
+#define _GLOBAL_H
 
 //******************************* Include Files *******************************
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
-#include "Global.h"
-#include "PrintFunction.h"
 
 //******************************* Global Types ********************************
 
@@ -32,18 +25,14 @@
 //***************************** Class Declaration *****************************
 
 //*********************** Inline Method Implementations ***********************
+typedef signed char		    int8;
+typedef unsigned char		uint8;
+typedef short			    int16;
+typedef unsigned short		uint16;
+typedef int			        int32;
+typedef unsigned		    uint32;
+typedef long long		    int64;
+typedef unsigned long long	uint64;
 
-int main()
-{
-    // variables decleared here
-    uint8 pucInputString[STRING_SIZE] = {0};
-
-    memset(pucInputString, 0x00, sizeof(pucInputString));
-    PrintString("Enter a string Here");
-    scanf("%63[^\n]s", (char *)pucInputString);
-    PrintString("Input string is : ");
-    PrintString(pucInputString);
-
-    return 0;
-    
-}
+#endif // _GLOBAL_H
+// EOF

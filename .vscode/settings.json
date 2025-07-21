@@ -2,6 +2,9 @@
     "files.associations": {
         "string.h": "c",
         "stdio.h": "c",
-        "printfunction.h": "c"
+        "printfunction.h": "c",
+        "stdbool.h": "c",
+        "global.h": "c",
+        "stdlib.h": "c"
     }
 }

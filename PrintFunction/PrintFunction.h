@@ -1,7 +1,7 @@
-//**************************** TRAININGTASK **********************************
+//**************************** TRAININGTASK ***********************************
 // Copyright (c) 2025 Trenser
 // All Rights Reserved
-//****************************************************************************
+//*****************************************************************************
 //
 // Summary  : Write a program to familiar with coding standards and basic HIT 
 //            operations
@@ -15,14 +15,17 @@
 
 //******************************* Include Files *******************************
 #include <stdio.h>
-#include <stdint.h>
 #include <stdbool.h>
+#include <stdint.h>
+
+#include "Global.h"
 
 //******************************* Global Types ********************************
 
 //***************************** Global Constants ******************************
 
 //***************************** Global Variables ******************************
+#define STRING_SIZE 64
 
 //**************************** Forward Declarations ***************************
 
@@ -30,7 +33,7 @@
 
 //*********************** Inline Method Implementations ***********************
 
-bool PrintString(uint8_t *pucInputString);
+bool PrintString(uint8 *pucInputString);
 
 #endif // _PRINT_FUNCTIONS_H
 // EOF

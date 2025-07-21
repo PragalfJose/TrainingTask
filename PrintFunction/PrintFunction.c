@@ -1,10 +1,10 @@
-//**************************** TRAINIGTASK ******************************
+//**************************** TRAINIGTASK ************************************
 // Copyright (c) 2025 Trenser
 // All Rights Reserved
 //*****************************************************************************
 //
 // File     : PrintFunction.c
-// Summary  : Write a program to familiar with coding standards and basic HIT 
+// Summary  : Write a program to familiar with coding standards and basic GIT 
 //            operations
 // Note     : Simple program to print hello world with multiple file
 // Author   : Pragalf T Jose
@@ -32,7 +32,7 @@
 //Return    : true - print success, false - invalid argument
 //Notes     : 
 //*****************************************************************************
-bool PrintString(uint8_t *pucInputString)
+bool PrintString(uint8 *pucInputString)
 {
     bool blReturn = false;
 
