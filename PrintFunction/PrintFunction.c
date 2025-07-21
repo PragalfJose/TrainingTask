@@ -38,7 +38,7 @@ bool PrintString(uint8_t *pucInputString)
 
     if(pucInputString != NULL)
     {
-        printf("Input string is : %s\r\n",pucInputString);
+        printf("%s\r\n",pucInputString);
         blReturn = true;
     }
 

@@ -41,8 +41,8 @@ int main()
 
     memset(pucInputString, 0x00, sizeof(pucInputString));
     PrintString("Enter a string");
-    scanf("%64[^\n]s",pucInputString);
-
+    scanf("%63[^\n]s",pucInputString);
+    PrintString("Input string is : ");
     PrintString(pucInputString);
     return 0;
 }
