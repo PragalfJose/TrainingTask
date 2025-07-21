@@ -24,9 +24,8 @@
 
 //***************************** Global Constants ******************************
 
-#define STRING_SIZE 64
-
 //***************************** Global Variables ******************************
+#define STRING_SIZE 64
 
 //**************************** Forward Declarations ***************************
 
@@ -41,7 +40,7 @@ int main()
 
     memset(pucInputString, 0x00, sizeof(pucInputString));
     PrintString("Enter a string");
-    scanf("%63[^\n]s",pucInputString);
+    scanf("%63[^\n]s", (char *)pucInputString);
     PrintString("Input string is : ");
     PrintString(pucInputString);
     return 0;

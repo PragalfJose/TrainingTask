@@ -25,20 +25,20 @@
 
 //*********************** Class Method Implementations ************************
 
-//******************************.PrintString.******************************
+//******************************.PrintString.**********************************
 //Purpose   : Print an input string
 //Inputs    : pucInputString - Input string to print
 //Outputs   : None
 //Return    : true - print success, false - invalid argument
 //Notes     : 
-//**********************************************************************************
+//*****************************************************************************
 bool PrintString(uint8_t *pucInputString)
 {
     bool blReturn = false;
 
     if(pucInputString != NULL)
     {
-        printf("%s\r\n",pucInputString);
+        printf("%s\r\n", pucInputString);
         blReturn = true;
     }
 
