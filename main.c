@@ -1,17 +1,19 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <stdint.h>
 #include <string.h>
 
-// #include "PrintFunction.h"
+#include "PrintFunction/PrintFunction.h"
 
 int main()
 {
     // variables decleared here
-    char InputString[64];
+    uint8_t ucInputString[64];
 
-    memset(InputString,0,sizeof(InputString));
-    printf("Enter a string\r\n");
-    scanf("%[^\n]s",InputString);
+    memset(ucInputString,0,sizeof(ucInputString));
+    PrintString("Enter a string");
+    scanf("%[^\n]s",ucInputString);
 
-    printf("Scanned String : %s\r\n",InputString);
+    PrintString(ucInputString);
     return 0;
 }
