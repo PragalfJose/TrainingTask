@@ -124,7 +124,6 @@ bool appTimerConvertTimeToString(struct tm* pstCurrentTime,
 //Purpose   : Create a dealy
 //Inputs    : ulSeconds - Delay needed in Seconds
 //Outputs   : None 
-//Outputs   : None 
 //Return    : None
 //Notes     : None
 //*****************************************************************************
@@ -132,12 +131,11 @@ void appTimerDelay(uint32 ulSeconds)
 {
     uint32 ulStartTime = 0;
     ulStartTime = (uint32)clock();
-    
+
     while ((clock()) < ((ulStartTime) + (ulSeconds * CLOCKS_PER_SEC)))
     {
 
     }
-    
 }
 
 //***************************.appTimerDisplay.*********************************
