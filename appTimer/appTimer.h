@@ -3,7 +3,7 @@
 // All Rights Reserved
 //*****************************************************************************
 //
-// File 	: appTimer.h
+// File     : appTimer.h
 // Summary 	: Timer related functions
 // Note 	: None
 // Author 	: Pragalf T Jose
