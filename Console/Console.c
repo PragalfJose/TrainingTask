@@ -1,19 +1,18 @@
 //**************************** TRAINIGTASK ************************************
-// Copyright (c) 2025 Trenser
+// Copyright (c) 2025 Trenser Technology Solutions
 // All Rights Reserved
 //*****************************************************************************
 //
-// File     : PrintFunction.c
-// Summary  : Write a program to familiar with coding standards and basic GIT 
-//            operations
-// Note     : Simple program to print hello world with multiple file
+// File     : Console.c
+// Summary  : Includes functions to output data to terminal
+// Note     : None
 // Author   : Pragalf T Jose
 // Date     : 21/07/2025
 //
 //*****************************************************************************
 
 //******************************* Include Files *******************************
-#include "PrintFunction.h"
+#include "Console.h"
 
 //******************************* Local Types *********************************
 
@@ -23,16 +22,14 @@
 
 //****************************** Local Functions ******************************
 
-//*********************** Class Method Implementations ************************
-
 //******************************.PrintString.**********************************
 //Purpose   : Print an input string
 //Inputs    : pucInputString - Input string to print
 //Outputs   : None
 //Return    : true - print success, false - invalid argument
-//Notes     : 
+//Notes     : None
 //*****************************************************************************
-bool PrintString(uint8 *pucInputString)
+bool consolePrint(uint8 *pucInputString)
 {
     bool blReturn = false;
 

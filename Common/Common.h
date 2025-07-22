@@ -1,16 +1,16 @@
 //**************************** TRAININGTASK ***********************************
-// Copyright (c) 2025 Trenser
+// Copyright (c) 2025 Trenser Technology Solutions
 // All Rights Reserved
 //*****************************************************************************
 //
 // Summary  : Include global definitions and declarations
-// Note     :
+// Note     : None
 //          :
 //          :
 //
 //*****************************************************************************
-#ifndef _GLOBAL_H
-#define _GLOBAL_H
+#ifndef _COMMON_H
+#define _COMMON_H
 
 //******************************* Include Files *******************************
 
@@ -30,9 +30,5 @@ typedef unsigned long long      uint64;
 
 //**************************** Forward Declarations ***************************
 
-//***************************** Class Declaration *****************************
-
-//*********************** Inline Method Implementations ***********************
-
-#endif // _GLOBAL_H
+#endif // _COMMON_H
 // EOF

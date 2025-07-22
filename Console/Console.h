@@ -1,38 +1,33 @@
 //**************************** TRAININGTASK ***********************************
-// Copyright (c) 2025 Trenser
+// Copyright (c) 2025 Trenser Technology Solutions
 // All Rights Reserved
 //*****************************************************************************
 //
-// Summary  : Write a program to familiar with coding standards and basic HIT 
-//            operations
-// Note     : Simple program to print hello world with multiple files in it
+// Summary  : 
+// Note     : None
 //          :
 //          :
 //
 //*****************************************************************************
-#ifndef _PRINT_FUNCTIONS_H
-#define _PRINT_FUNCTIONS_H
+#ifndef _CONSOLE_H
+#define _CONSOLE_H
 
 //******************************* Include Files *******************************
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdint.h>
-#include "Global.h"
+#include "Common.h"
 
 //******************************* Global Types ********************************
 
 //***************************** Global Constants ******************************
-#define STRING_SIZE 64
+#define STRING_SIZE         64
 
 //***************************** Global Variables ******************************
 
 //**************************** Forward Declarations ***************************
 
-//***************************** Class Declaration *****************************
+bool consolePrint(uint8 *pucInputString);
 
-//*********************** Inline Method Implementations ***********************
-
-bool PrintString(uint8 *pucInputString);
-
-#endif // _PRINT_FUNCTIONS_H
+#endif // _CONSOLE_H
 // EOF

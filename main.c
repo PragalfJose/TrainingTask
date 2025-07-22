@@ -1,5 +1,5 @@
 //**************************** TRAINIGTASK ************************************
-// Copyright (c) 2025 Trenser
+// Copyright (c) 2025 Trenser Technology Solutions
 // All Rights Reserved
 //*****************************************************************************
 //
@@ -17,8 +17,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "Global.h"
-#include "PrintFunction.h"
+#include "Common.h"
+#include "Console.h"
 
 //******************************* Global Types ********************************
 
@@ -26,18 +26,12 @@
 
 //***************************** Global Variables ******************************
 
-//**************************** Forward Declarations ***************************
-
-//***************************** Class Declaration *****************************
-
-//*********************** Inline Method Implementations ***********************
-
 //******************************.main.**********************************
 //Purpose   : Main function
 //Inputs    : None
 //Outputs   : None
 //Return    : None
-//Notes     : 
+//Notes     : None
 //*****************************************************************************
 int main()
 {
@@ -45,10 +39,10 @@ int main()
     uint8 pucInputString[STRING_SIZE] = {0};
 
     memset(pucInputString, 0x00, sizeof(pucInputString));
-    PrintString("Enter a string Here");
+    consolePrint("Enter a string");
     scanf("%63[^\n]s", (char *)pucInputString);
-    PrintString("Input string is : ");
-    PrintString(pucInputString);
+    consolePrint("Input string : ");
+    consolePrint(pucInputString);
 
     return 0;
     
