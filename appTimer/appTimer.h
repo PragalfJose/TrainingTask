@@ -4,10 +4,10 @@
 //*****************************************************************************
 //
 // File     : appTimer.h
-// Summary 	: Timer related functions
-// Note 	: None
-// Author 	: Pragalf T Jose
-// Date 	: 22/07/2025
+// Summary  : Timer related functions
+// Note     : None
+// Author   : Pragalf T Jose
+// Date     : 22/07/2025
 //
 //*****************************************************************************
 #ifndef _APP_TIMER_H
