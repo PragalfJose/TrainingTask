@@ -17,7 +17,6 @@
 #include "Common.h"
 #include "Console.h"
 #include "appTimer.h"
-#include <windows.h>
 
 //******************************* Global Types ********************************
 
