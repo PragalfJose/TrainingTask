@@ -1,0 +1,48 @@
+//**************************** ProjectConsole *********************************
+// Copyright (c) 2025 Trenser Technology Solutions
+// All Rights Reserved
+//*****************************************************************************
+//
+// Summary 	: Timer related functions
+// Note 	: None
+// Author 	: Pragalf T Jose
+// Date 	: 22/07/2025
+//
+//*****************************************************************************
+#ifndef _APP_TIMER_H
+#define _APP_TIMER_H
+
+//******************************* Include Files *******************************
+#include <time.h>
+#include <stdbool.h>
+#include <stdio.h>
+#include "Common.h"
+
+//******************************* Global Types ********************************
+
+//***************************** Global Constants ******************************
+#define YEAR_OFFSET             1900
+#define MONTH_OFFSET            1
+#define WEEK_DAY_OFFSET         1
+#define HOUR_OFFSET             12
+#define MAX_COUNT_VALUE         2000000
+#define MS_COUNT_VALUE          1000
+// IST - 5hr 30minutes is GST
+#define GMT_OFFSET              19800              //05hr 30 minutes to seconds
+// IST - 12hr 30 minutes is PST
+#define PST_OFFSET              45000              //12hr 30 minutes to seconds
+
+//***************************** Global Variables ******************************
+
+//**************************** Forward Declarations ***************************
+
+bool appTimerGetEpochTime(uint32 *puiSeconds);
+bool appTimerGetLocalTime(uint32 *puiSeconds, struct tm *sCurrentLocalTime);
+bool appTimerConvertTimeToString(struct tm* psCurrentTime,
+                                 uint8 *pucCurrentDateString,
+                                 uint8 *pucCurrentTimeString);
+void appTimerDelay(uint32 uiSeconds);
+
+#endif // _APP_TIMER_H
+// EOF
+

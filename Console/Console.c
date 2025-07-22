@@ -35,7 +35,7 @@ bool consolePrint(uint8 *pucInputString)
 
     if(pucInputString != NULL)
     {
-        printf("%s\r\n", pucInputString);
+        printf("%s", pucInputString);
         blReturn = true;
     }
 
