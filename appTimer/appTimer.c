@@ -126,26 +126,18 @@ bool appTimerConvertTimeToString(struct tm* pstCurrentTime,
 //Outputs   : None 
 //Outputs   : None 
 //Return    : None
-//Notes     : Used only for approximate values of dealy. Not accurate
+//Notes     : None
 //*****************************************************************************
 void appTimerDelay(uint32 ulSeconds)
 {
-    uint32 ulCountValue1 = 0;
-    uint32 ulCountValue2 = 0;
-    uint32 ulCountValue3 = 0;
-
-    for(ulCountValue3 = 0; ulCountValue3 < ulSeconds; ulCountValue3++)
+    uint32 ulStartTime = 0;
+    ulStartTime = (uint32)clock();
+    
+    while ((clock()) < ((ulStartTime) + (ulSeconds * CLOCKS_PER_SEC)))
     {
-        for(ulCountValue2 = 0; ulCountValue2 < MS_COUNT_VALUE; ulCountValue2++)
-        {
-            for(ulCountValue1 = 0; 
-                ulCountValue1 < MAX_COUNT_VALUE; 
-                ulCountValue1++)
-            {
 
-            }
-        }
     }
+    
 }
 
 //***************************.appTimerDisplay.*********************************
