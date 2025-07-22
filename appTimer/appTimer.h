@@ -3,6 +3,7 @@
 // All Rights Reserved
 //*****************************************************************************
 //
+// File 	: appTimer.h
 // Summary 	: Timer related functions
 // Note 	: None
 // Author 	: Pragalf T Jose
@@ -17,6 +18,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include "Common.h"
+#include "Console.h"
 
 //******************************* Global Types ********************************
 
@@ -25,7 +27,7 @@
 #define MONTH_OFFSET            1
 #define WEEK_DAY_OFFSET         1
 #define HOUR_OFFSET             12
-#define MAX_COUNT_VALUE         2000000
+#define MAX_COUNT_VALUE         2500000
 #define MS_COUNT_VALUE          1000
 // IST - 5hr 30minutes is GST
 #define GMT_OFFSET              19800              //05hr 30 minutes to seconds
@@ -36,12 +38,13 @@
 
 //**************************** Forward Declarations ***************************
 
-bool appTimerGetEpochTime(uint32 *puiSeconds);
-bool appTimerGetLocalTime(uint32 *puiSeconds, struct tm *sCurrentLocalTime);
-bool appTimerConvertTimeToString(struct tm* psCurrentTime,
+bool appTimerGetEpochTime(uint32 *pulSeconds);
+bool appTimerGetLocalTime(uint32 *pulSeconds, struct tm *pstCurrentLocalTime);
+bool appTimerConvertTimeToString(struct tm* pstCurrentTime,
                                  uint8 *pucCurrentDateString,
                                  uint8 *pucCurrentTimeString);
-void appTimerDelay(uint32 uiSeconds);
+void appTimerDelay(uint32 pulSeconds);
+void appTimerDisplay(void);
 
 #endif // _APP_TIMER_H
 // EOF

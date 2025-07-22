@@ -3,6 +3,7 @@
 // All Rights Reserved
 //*****************************************************************************
 //
+// File 	: Console.h
 // Summary  : Console input / output related functions 
 // Note     : None
 // Author   : Pragalf T Jose
@@ -21,6 +22,7 @@
 
 //***************************** Global Constants ******************************
 #define STRING_SIZE             64
+#define MAX_STRING_SIZE         256
 
 //***************************** Global Variables ******************************
 
