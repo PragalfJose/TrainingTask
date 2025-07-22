@@ -15,7 +15,6 @@
 //******************************* Include Files *******************************
 #include <stdio.h>
 #include <stdbool.h>
-#include <stdint.h>
 #include "Common.h"
 
 //******************************* Global Types ********************************
