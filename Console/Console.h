@@ -1,12 +1,12 @@
-//**************************** TRAININGTASK ***********************************
+//**************************** ProjectConsole ***********************************
 // Copyright (c) 2025 Trenser Technology Solutions
 // All Rights Reserved
 //*****************************************************************************
 //
-// Summary  : 
+// Summary  : Console input / output related functions 
 // Note     : None
-//          :
-//          :
+// Author   : Pragalf T Jose
+// Date     : 21/07/2025
 //
 //*****************************************************************************
 #ifndef _CONSOLE_H

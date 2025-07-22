@@ -1,12 +1,11 @@
-//**************************** TRAINIGTASK ************************************
+//**************************** ProjectConsole ************************************
 // Copyright (c) 2025 Trenser Technology Solutions
 // All Rights Reserved
 //*****************************************************************************
 //
 // File     : main.c
-// Summary  : Program to familiar with coding standards and basic HIT 
-//            operations
-// Note     : Simple program to print hello world with multiple file
+// Summary  : Scan and print a string
+// Note     : None
 // Author   : Pragalf T Jose
 // Date     : 21/07/2025
 //
@@ -31,7 +30,7 @@
 //Inputs    : None
 //Outputs   : None
 //Return    : None
-//Notes     : None
+//Notes     : Scan a string from console and print it in output terminal
 //*****************************************************************************
 int main()
 {

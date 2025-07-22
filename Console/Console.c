@@ -1,10 +1,10 @@
-//**************************** TRAINIGTASK ************************************
+//**************************** ProjectConsole ************************************
 // Copyright (c) 2025 Trenser Technology Solutions
 // All Rights Reserved
 //*****************************************************************************
 //
 // File     : Console.c
-// Summary  : Includes functions to output data to terminal
+// Summary  : Includes function to output data to terminal
 // Note     : None
 // Author   : Pragalf T Jose
 // Date     : 21/07/2025
