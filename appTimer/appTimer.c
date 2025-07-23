@@ -1,13 +1,13 @@
-//**************************** ProjectConsole *********************************
+//****************************** appTimer *************************************
 // Copyright (c) 2025 Trenser Technology Solutions
 // All Rights Reserved
 //*****************************************************************************
 //
-// File 	: appTimer.c
-// Summary 	: Timer related functions
-// Note 	: Timer related functions to fetch and process time from system
-// Author 	: Pragalf T Jose
-// Date 	: 22/07/2025
+// File     : appTimer.c
+// Summary  : Timer related functions
+// Note     : Timer related functions to fetch and process time from system
+// Author   : Pragalf T Jose
+// Date     : 22/07/2025
 //
 //*****************************************************************************
 
