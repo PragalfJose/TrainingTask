@@ -14,7 +14,6 @@
 #define _APP_LED_H
 
 //******************************* Include Files *******************************
-
 #include <stdbool.h>
 #include "Common.h"
 #include "Console.h"

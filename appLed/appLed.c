@@ -5,7 +5,7 @@
 //
 // File     : appLed.c
 // Summary  : LED controlling functions
-// Note     : Function to control state of an LED
+// Note     : Function to control state of LED
 // Author   : Pragalf T Jose
 // Date     : 24/07/2025
 //
@@ -33,8 +33,10 @@ uint8 ucLedStaus = LED_OFF;
 bool appLedStateOn(uint16 uiPinNumber)
 {
     bool blReturn = false;
+
     if(uiPinNumber != ERR_PIN)
     {
+        // add code to turn on LED
         consolePrint("LED ON\r\n");
         ucLedStaus = LED_ON;
         blReturn = true;
@@ -53,8 +55,10 @@ bool appLedStateOn(uint16 uiPinNumber)
 bool appLedStateOff(uint16 uiPinNumber)
 {
     bool blReturn = false;
+
     if(uiPinNumber != ERR_PIN)
     {
+        // add code to turn off LED
         consolePrint("LED OFF\r\n");
         ucLedStaus = LED_OFF;
         blReturn = true;
@@ -73,6 +77,7 @@ bool appLedStateOff(uint16 uiPinNumber)
 bool appLedStateToggle(uint16 uiPinNumber)
 {
     bool blReturn = false;
+    
     if(uiPinNumber != ERR_PIN)
     {
         if(LED_OFF == ucLedStaus)
