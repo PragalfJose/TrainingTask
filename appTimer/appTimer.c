@@ -56,7 +56,7 @@ bool appTimerGetLocalTime(uint32 *pulSeconds, struct tm *pstCurrentLocalTime)
     bool blReturn = false;
     struct tm *pstCurrentTime = NULL;
 
-    pstCurrentTime = localtime((time_t*)pulSeconds);
+    pstCurrentTime = gmtime((time_t*)pulSeconds);
 
     if((pulSeconds != NULL) && 
        (pstCurrentLocalTime != NULL) &&
@@ -159,8 +159,7 @@ void appTimerDisplay(void)
     appTimerGetEpochTime(&ulEpochTime);
     sprintf(pucEpochTimeString, "Epoch: %u", ulEpochTime);
 
-    ulTemporaryEpochTime = ulEpochTime - GMT_OFFSET;
-    appTimerGetLocalTime(&ulTemporaryEpochTime, &stCurrentTime);
+    appTimerGetLocalTime(&ulEpochTime, &stCurrentTime);
     appTimerConvertTimeToString(&stCurrentTime, 
                                 pucDateString, 
                                 pucTimeString);
@@ -172,7 +171,8 @@ void appTimerDisplay(void)
     consolePrint("UTC (0:00)\r\n-------------\r\n");
     consolePrint(pucOutputString);
 
-    appTimerGetLocalTime(&ulEpochTime, &stCurrentTime);
+    ulTemporaryEpochTime = ulEpochTime + IST_OFFSET;
+    appTimerGetLocalTime(&ulTemporaryEpochTime, &stCurrentTime);
     appTimerConvertTimeToString(&stCurrentTime, 
                                 pucDateString, 
                                 pucTimeString);
@@ -192,7 +192,7 @@ void appTimerDisplay(void)
           "Time : %s\r\nDate : %s\r\n\r\n", 
           pucTimeString, 
           pucDateString);
-    consolePrint("PST (+07:00)\r\n-------------\r\n");
+    consolePrint("PST (-07:00)\r\n-------------\r\n");
     consolePrint(pucOutputString);
 }
 

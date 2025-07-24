@@ -29,10 +29,10 @@
 #define HOUR_OFFSET             12
 #define MAX_COUNT_VALUE         2500000
 #define MS_COUNT_VALUE          1000
-// IST - 5hr 30minutes is GST
-#define GMT_OFFSET              19800              //05hr 30 minutes to seconds
-// IST - 12hr 30 minutes is PST
-#define PST_OFFSET              45000              //12hr 30 minutes to seconds
+// GMT + 5hr 30minutes is GST
+#define IST_OFFSET              19800              //05hr 30 minutes to seconds
+// GMT - 07hr 00 minutes is PST
+#define PST_OFFSET              25200              //07hr 00 minutes to seconds
 
 //***************************** Global Variables ******************************
 
