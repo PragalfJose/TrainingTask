@@ -17,6 +17,7 @@
 #include "Common.h"
 #include "Console.h"
 #include "appTimer.h"
+#include "appLed.h"
 
 //******************************* Global Types ********************************
 
@@ -39,6 +40,7 @@ int main()
     while(true)
     {
         appTimerDisplay();
+        appLedStateToggle(LED_PIN);
         appTimerDelay(1);
     }
 
