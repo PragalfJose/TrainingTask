@@ -23,6 +23,7 @@
 //***************************** Global Constants ******************************
 #define STRING_SIZE             64
 #define MAX_STRING_SIZE         256
+#define MIN_STRING_SIZE         8
 
 //***************************** Global Variables ******************************
 

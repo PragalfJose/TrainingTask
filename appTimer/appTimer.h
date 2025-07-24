@@ -17,6 +17,7 @@
 #include <time.h>
 #include <stdbool.h>
 #include <stdio.h>
+#include <string.h>
 #include "Common.h"
 #include "Console.h"
 

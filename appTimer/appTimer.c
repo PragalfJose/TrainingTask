@@ -90,6 +90,7 @@ bool appTimerConvertTimeToString(struct tm* pstCurrentTime,
                                  uint8 *pucCurrentTimeString)
 {
     bool blReturn = false;
+    uint8 pucHourOffsetString[MIN_STRING_SIZE] = {0};
 
     if((pstCurrentTime != NULL) && 
        (pucCurrentDateString != NULL) && 
@@ -102,19 +103,22 @@ bool appTimerConvertTimeToString(struct tm* pstCurrentTime,
 
         if(pstCurrentTime->tm_hour >= HOUR_OFFSET)
         {
-            pstCurrentTime->tm_hour -= HOUR_OFFSET;
-            sprintf((char*)pucCurrentTimeString, "%02d:%02d:%02d PM", 
-                    pstCurrentTime->tm_hour, 
-                    pstCurrentTime->tm_min, 
-                    pstCurrentTime->tm_sec);
+            sprintf((char*)pucHourOffsetString,"PM");
         }
         else
         {
-            sprintf((char*)pucCurrentTimeString, "%02d:%02d:%02d AM", 
+            sprintf((char*)pucHourOffsetString,"AM");
+        }
+        if(pstCurrentTime->tm_hour > HOUR_OFFSET)
+        {
+            pstCurrentTime->tm_hour -= HOUR_OFFSET;
+        }
+
+        sprintf((char*)pucCurrentTimeString, "%02d:%02d:%02d %s", 
                     pstCurrentTime->tm_hour, 
                     pstCurrentTime->tm_min, 
-                    pstCurrentTime->tm_sec);
-        }
+                    pstCurrentTime->tm_sec, 
+                    pucHourOffsetString);
     }
 
     return blReturn;
@@ -171,6 +175,7 @@ void appTimerDisplay(void)
     consolePrint((uint8*)"UTC (0:00)\r\n-------------\r\n");
     consolePrint(pucOutputString);
 
+    memset(&stCurrentTime,0,sizeof(stCurrentTime));
     ulTemporaryEpochTime = ulEpochTime + IST_OFFSET;
     appTimerGetLocalTime(&ulTemporaryEpochTime, &stCurrentTime);
     appTimerConvertTimeToString(&stCurrentTime, 
@@ -183,6 +188,7 @@ void appTimerDisplay(void)
     consolePrint((uint8*)"IST (+05:30)\r\n-------------\r\n");
     consolePrint(pucOutputString);
 
+    memset(&stCurrentTime,0,sizeof(stCurrentTime));
     ulTemporaryEpochTime = ulEpochTime - PST_OFFSET;
     appTimerGetLocalTime(&ulTemporaryEpochTime, &stCurrentTime);
     appTimerConvertTimeToString(&stCurrentTime, 
