@@ -37,7 +37,7 @@ bool appLedStateOn(uint16 uiPinNumber)
     if(uiPinNumber != ERR_PIN)
     {
         // add code to turn on LED
-        consolePrint("LED ON\r\n");
+        consolePrint((uint8*)"LED ON\r\n");
         ucLedStaus = LED_ON;
         blReturn = true;
     }
@@ -59,7 +59,7 @@ bool appLedStateOff(uint16 uiPinNumber)
     if(uiPinNumber != ERR_PIN)
     {
         // add code to turn off LED
-        consolePrint("LED OFF\r\n");
+        consolePrint((uint8*)"LED OFF\r\n");
         ucLedStaus = LED_OFF;
         blReturn = true;
     }
@@ -77,7 +77,7 @@ bool appLedStateOff(uint16 uiPinNumber)
 bool appLedStateToggle(uint16 uiPinNumber)
 {
     bool blReturn = false;
-    
+
     if(uiPinNumber != ERR_PIN)
     {
         if(LED_OFF == ucLedStaus)

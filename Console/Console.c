@@ -35,7 +35,7 @@ bool consolePrint(uint8 *pucInputString)
 
     if(pucInputString != NULL)
     {
-        for(pucInputString; *pucInputString; pucInputString++)
+        for( ; *pucInputString; pucInputString++)
         {
             printf("%c", *pucInputString);
         }

@@ -95,7 +95,7 @@ bool appTimerConvertTimeToString(struct tm* pstCurrentTime,
        (pucCurrentDateString != NULL) && 
        (pucCurrentTimeString != NULL))
     {
-        sprintf(pucCurrentDateString, "%02d/%02d/%04d", 
+        sprintf((char*)pucCurrentDateString, "%02d/%02d/%04d", 
                 pstCurrentTime->tm_mday, 
                 pstCurrentTime->tm_mon, 
                 pstCurrentTime->tm_year);
@@ -103,14 +103,14 @@ bool appTimerConvertTimeToString(struct tm* pstCurrentTime,
         if(pstCurrentTime->tm_hour >= HOUR_OFFSET)
         {
             pstCurrentTime->tm_hour -= HOUR_OFFSET;
-            sprintf(pucCurrentTimeString, "%02d:%02d:%02d PM", 
+            sprintf((char*)pucCurrentTimeString, "%02d:%02d:%02d PM", 
                     pstCurrentTime->tm_hour, 
                     pstCurrentTime->tm_min, 
                     pstCurrentTime->tm_sec);
         }
         else
         {
-            sprintf(pucCurrentTimeString, "%02d:%02d:%02d AM", 
+            sprintf((char*)pucCurrentTimeString, "%02d:%02d:%02d AM", 
                     pstCurrentTime->tm_hour, 
                     pstCurrentTime->tm_min, 
                     pstCurrentTime->tm_sec);
@@ -157,18 +157,18 @@ void appTimerDisplay(void)
     uint32 ulTemporaryEpochTime = 0;
 
     appTimerGetEpochTime(&ulEpochTime);
-    sprintf(pucEpochTimeString, "Epoch: %u", ulEpochTime);
+    sprintf((char*)pucEpochTimeString, "Epoch: %u", ulEpochTime);
 
     appTimerGetLocalTime(&ulEpochTime, &stCurrentTime);
     appTimerConvertTimeToString(&stCurrentTime, 
                                 pucDateString, 
                                 pucTimeString);
-    sprintf(pucOutputString, 
+    sprintf((char*)pucOutputString, 
           "Time : %s\r\nDate : %s\r\nEpoch: %s\r\n\r\n", 
           pucTimeString, 
           pucDateString, 
           pucEpochTimeString);
-    consolePrint("UTC (0:00)\r\n-------------\r\n");
+    consolePrint((uint8*)"UTC (0:00)\r\n-------------\r\n");
     consolePrint(pucOutputString);
 
     ulTemporaryEpochTime = ulEpochTime + IST_OFFSET;
@@ -176,11 +176,11 @@ void appTimerDisplay(void)
     appTimerConvertTimeToString(&stCurrentTime, 
                                 pucDateString, 
                                 pucTimeString);
-    sprintf(pucOutputString, 
+    sprintf((char*)pucOutputString, 
           "Time : %s\r\nDate : %s\r\n\r\n", 
           pucTimeString, 
           pucDateString);
-    consolePrint("IST (+05:30)\r\n-------------\r\n");
+    consolePrint((uint8*)"IST (+05:30)\r\n-------------\r\n");
     consolePrint(pucOutputString);
 
     ulTemporaryEpochTime = ulEpochTime - PST_OFFSET;
@@ -188,11 +188,11 @@ void appTimerDisplay(void)
     appTimerConvertTimeToString(&stCurrentTime, 
                                 pucDateString, 
                                 pucTimeString);
-    sprintf(pucOutputString, 
+    sprintf((char*)pucOutputString, 
           "Time : %s\r\nDate : %s\r\n\r\n", 
           pucTimeString, 
           pucDateString);
-    consolePrint("PST (-07:00)\r\n-------------\r\n");
+    consolePrint((uint8*)"PST (-07:00)\r\n-------------\r\n");
     consolePrint(pucOutputString);
 }
 
