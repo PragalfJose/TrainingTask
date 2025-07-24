@@ -19,7 +19,7 @@
 //***************************** Local Constants *******************************
 
 //***************************** Local Variables *******************************
-uint8 uiLedStaus = 0;
+uint8 ucLedStaus = LED_OFF;
 
 //****************************** Local Functions ******************************
 
@@ -33,10 +33,10 @@ uint8 uiLedStaus = 0;
 bool appLedStateOn(uint16 uiPinNumber)
 {
     bool blReturn = false;
-    if(uiPinNumber != 0)
+    if(uiPinNumber != ERR_PIN)
     {
         consolePrint("LED ON\r\n");
-        uiLedStaus = 1;
+        ucLedStaus = LED_ON;
         blReturn = true;
     }
 
@@ -53,10 +53,10 @@ bool appLedStateOn(uint16 uiPinNumber)
 bool appLedStateOff(uint16 uiPinNumber)
 {
     bool blReturn = false;
-    if(uiPinNumber != 0)
+    if(uiPinNumber != ERR_PIN)
     {
         consolePrint("LED OFF\r\n");
-        uiLedStaus = 0;
+        ucLedStaus = LED_OFF;
         blReturn = true;
     }
 
@@ -73,13 +73,13 @@ bool appLedStateOff(uint16 uiPinNumber)
 bool appLedStateToggle(uint16 uiPinNumber)
 {
     bool blReturn = false;
-    if(uiPinNumber != 0)
+    if(uiPinNumber != ERR_PIN)
     {
-        if(LED_OFF == uiLedStaus)
+        if(LED_OFF == ucLedStaus)
         {
             appLedStateOn(uiPinNumber);
         }
-        else if(LED_ON == uiLedStaus)
+        else if(LED_ON == ucLedStaus)
         {
             appLedStateOff(uiPinNumber);
         }

@@ -24,6 +24,7 @@
 //***************************** Global Constants ******************************
 #define LED_ON                  1
 #define LED_OFF                 0
+#define ERR_PIN                 0
 #define LED_PIN                 15               // Connected pin number
 
 //***************************** Global Variables ******************************

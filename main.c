@@ -35,7 +35,6 @@
 int main()
 {
     // variables decleared here
-    // uint8 pucOutputString[STRING_SIZE] = {0};
 
     while(true)
     {
