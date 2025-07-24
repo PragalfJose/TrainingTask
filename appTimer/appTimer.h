@@ -43,7 +43,7 @@ bool appTimerGetLocalTime(uint32 *pulSeconds, struct tm *pstCurrentLocalTime);
 bool appTimerConvertTimeToString(struct tm* pstCurrentTime,
                                  uint8 *pucCurrentDateString,
                                  uint8 *pucCurrentTimeString);
-void appTimerDelay(uint32 pulSeconds);
+void appTimerDelay(int32 lSeconds);
 void appTimerDisplay(void);
 
 #endif // _APP_TIMER_H

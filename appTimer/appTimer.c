@@ -127,12 +127,12 @@ bool appTimerConvertTimeToString(struct tm* pstCurrentTime,
 //Return    : None
 //Notes     : None
 //*****************************************************************************
-void appTimerDelay(uint32 ulSeconds)
+void appTimerDelay(int32 lSeconds)
 {
-    uint32 ulStartTime = 0;
-    ulStartTime = (uint32)clock();
+    int32 lStartTime = 0;
+    lStartTime = clock();
 
-    while ((clock()) < ((ulStartTime) + (ulSeconds * CLOCKS_PER_SEC)))
+    while ((clock()) < ((lStartTime) + (lSeconds * CLOCKS_PER_SEC)))
     {
 
     }
