@@ -25,7 +25,7 @@
 //***************************** Global Variables ******************************
 
 //******************************.main.*****************************************
-//Purpose   : Main function
+//Purpose   : Fetch and process time from system
 //Inputs    : None
 //Outputs   : None
 //Return    : None
