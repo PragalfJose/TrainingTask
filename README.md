@@ -1,2 +1,2 @@
-# TrainingTask
-To hold the details and codes of assigned Tasks in training time
+# Project Console
+Fetch and process time from system. Also contol the state of and LED
