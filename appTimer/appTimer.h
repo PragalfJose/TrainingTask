@@ -24,6 +24,7 @@
 //******************************* Global Types ********************************
 
 //***************************** Global Constants ******************************
+#define NULL_VALUE              0
 #define YEAR_OFFSET             1900
 #define MONTH_OFFSET            1
 #define WEEK_DAY_OFFSET         1
@@ -40,12 +41,14 @@
 //**************************** Forward Declarations ***************************
 
 bool appTimerGetEpochTime(uint32 *pulSeconds);
-bool appTimerGetLocalTime(uint32 *pulSeconds, struct tm *pstCurrentLocalTime);
+bool appTimerGetGMTTime(uint32 pulSeconds);
+bool appTimerGetISTTime(uint32 pulSeconds);
+bool appTimerGetPSTTime(uint32 pulSeconds);
 bool appTimerConvertTimeToString(struct tm* pstCurrentTime,
                                  uint8 *pucCurrentDateString,
                                  uint8 *pucCurrentTimeString);
 void appTimerDelay(int32 lSeconds);
-void appTimerDisplay(void);
+void appTimerProcessTime(void);
 
 #endif // _APP_TIMER_H
 // EOF

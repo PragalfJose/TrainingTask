@@ -4,7 +4,7 @@
 //*****************************************************************************
 //
 // File     : main.c
-// Summary  : Get system time and print
+// Summary  : Fetch and process system time and print. Also toggle LED state
 // Note     : None
 // Author   : Pragalf T Jose
 // Date     : 21/07/2025
@@ -34,11 +34,10 @@
 //*****************************************************************************
 int main()
 {
-    // variables decleared here
 
     while(true)
     {
-        appTimerDisplay();
+        appTimerProcessTime();
         appLedStateToggle(LED_PIN);
         appTimerDelay(1);
     }
