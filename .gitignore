@@ -1,0 +1,10 @@
+*.exe
+*.o
+*.s
+.vscode/
+main
+LedToggle
+Release
+Debug
+build
+Core
