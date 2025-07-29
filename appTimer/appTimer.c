@@ -51,30 +51,19 @@ bool appTimerGetEpochTime(uint32 *pulSeconds)
 //Return    : false - invalid argument
 //Notes     : None
 //*****************************************************************************
-bool appTimerGetGMTTime(uint32 pulSeconds)
+bool appTimerGetGMTTime(uint32 ulSeconds)
 {
     bool blReturn = false;
-    uint8 pucTimeString[STRING_SIZE] = {0};
-    uint8 pucDateString[STRING_SIZE] = {0};
-    uint8 pucOutputString[MAX_STRING_SIZE] = {0};
     struct tm *pstCurrentTime = NULL;
 
-    if(pulSeconds != NULL_VALUE)
+    if(ulSeconds != NULL_VALUE)
     {
-        pstCurrentTime = gmtime((time_t*)(&pulSeconds));
+        pstCurrentTime = gmtime((time_t*)(&ulSeconds));
 
         if(pstCurrentTime != NULL)
         {
-            appTimerConvertTimeToString(pstCurrentTime, 
-                                        pucDateString, 
-                                        pucTimeString);
-            sprintf((char*)pucOutputString, 
-                    "Time : %s\r\nDate : %s\r\nEpoch: %u\r\n\r\n", 
-                    pucTimeString, 
-                    pucDateString, 
-                    pulSeconds);
-            consolePrint((uint8*)"UTC (0:00)\r\n-------------\r\n");
-            consolePrint(pucOutputString);
+            appTimerDisplayTime(pstCurrentTime, TIMEZONE_GMT);
+            appTimerEpochTImeDisplay(ulSeconds);
             blReturn = true;
         }
     }
@@ -85,37 +74,26 @@ bool appTimerGetGMTTime(uint32 pulSeconds)
 
 //*****************************.appTimerGetISTTime.****************************
 //Purpose   : Get IST time from epoch value
-//Inputs    : pulSeconds - Epoch time 
+//Inputs    : ulSeconds - Epoch time 
 //Outputs   : None
 //Return    : true - Epoch time converted to IST time
 //Return    : false - invalid argument
 //Notes     : None
 //*****************************************************************************
-bool appTimerGetISTTime(uint32 pulSeconds)
+bool appTimerGetISTTime(uint32 ulSeconds)
 {
     bool blReturn = false;
-    uint8 pucTimeString[STRING_SIZE] = {0};
-    uint8 pucDateString[STRING_SIZE] = {0};
-    uint8 pucOutputString[MAX_STRING_SIZE] = {0};
     uint32 ulTemperoryEpoch = 0;
     struct tm *pstCurrentTime = NULL;
     
-    if(pulSeconds != NULL_VALUE)
+    if(ulSeconds != NULL_VALUE)
     {
-        ulTemperoryEpoch = pulSeconds + IST_OFFSET;
+        ulTemperoryEpoch = ulSeconds + IST_OFFSET;
         pstCurrentTime = gmtime((time_t*)&ulTemperoryEpoch);
 
         if((pstCurrentTime != NULL))
         {
-            appTimerConvertTimeToString(pstCurrentTime, 
-                                        pucDateString, 
-                                        pucTimeString);
-            sprintf((char*)pucOutputString, 
-                    "Time : %s\r\nDate : %s\r\n\r\n", 
-                    pucTimeString, 
-                    pucDateString);
-            consolePrint((uint8*)"IST (+05:30)\r\n-------------\r\n");
-            consolePrint(pucOutputString);
+            appTimerDisplayTime(pstCurrentTime, TIMEZONE_IST);
             blReturn = true;
         }
     }
@@ -126,37 +104,26 @@ bool appTimerGetISTTime(uint32 pulSeconds)
 
 //*****************************.appTimerGetPSTTime.****************************
 //Purpose   : Get PST time from epoch value
-//Inputs    : pulSeconds - Epoch time 
+//Inputs    : ulSeconds - Epoch time 
 //Outputs   : None
 //Return    : true - Epoch time converted to PST time
 //Return    : false - invalid argument
 //Notes     : None
 //*****************************************************************************
-bool appTimerGetPSTTime(uint32 pulSeconds)
+bool appTimerGetPSTTime(uint32 ulSeconds)
 {
     bool blReturn = false;
-    uint8 pucTimeString[STRING_SIZE] = {0};
-    uint8 pucDateString[STRING_SIZE] = {0};
-    uint8 pucOutputString[MAX_STRING_SIZE] = {0};
     uint32 ulTemperoryEpoch = 0;
     struct tm *pstCurrentTime = NULL;
 
-    if(pulSeconds != NULL_VALUE)
+    if(ulSeconds != NULL_VALUE)
     {
-        ulTemperoryEpoch = pulSeconds - PST_OFFSET;
+        ulTemperoryEpoch = ulSeconds - PST_OFFSET;
         pstCurrentTime = gmtime((time_t*)&ulTemperoryEpoch);
 
         if((pstCurrentTime != NULL))
         {
-            appTimerConvertTimeToString(pstCurrentTime, 
-                                        pucDateString, 
-                                        pucTimeString);
-            sprintf((char*)pucOutputString, 
-                    "Time : %s\r\nDate : %s\r\n\r\n", 
-                    pucTimeString, 
-                    pucDateString);
-            consolePrint((uint8*)"PST (-07:00)\r\n-------------\r\n");
-            consolePrint(pucOutputString);
+            appTimerDisplayTime(pstCurrentTime, TIMEZONE_PST);
             blReturn = true;
         }
     }
@@ -187,8 +154,8 @@ bool appTimerConvertTimeToString(struct tm* pstCurrentTime,
     {
         sprintf((char*)pucCurrentDateString, "%02d/%02d/%04d", 
                 pstCurrentTime->tm_mday, 
-                pstCurrentTime->tm_mon, 
-                pstCurrentTime->tm_year);
+                pstCurrentTime->tm_mon + MONTH_OFFSET, 
+                pstCurrentTime->tm_year + YEAR_OFFSET);
 
         if(pstCurrentTime->tm_hour >= HOUR_OFFSET)
         {
@@ -243,14 +210,97 @@ void appTimerProcessTime(void)
 {
     uint32 ulEpochSec = 0;
     uint32 ulEpochTime = 0;
+
     if(appTimerGetEpochTime(&ulEpochSec))
     {
         ulEpochTime = ulEpochSec;
-        printf("Time : %u\r\n",ulEpochTime);
         appTimerGetGMTTime(ulEpochTime);
         appTimerGetISTTime(ulEpochTime);
         appTimerGetPSTTime(ulEpochTime);
     }
+}
+
+//****************************.appTimerDisplayTime.****************************
+//Purpose   : Create a dealy
+//Inputs    : pstCurrentTime - structure holding time values
+//Inputs    : zone - Timezone format
+//Outputs   : None 
+//Return    : true  - Time printed according to timezone
+//Return    : false - invalid argument
+//Notes     : None
+//*****************************************************************************
+bool appTimerDisplayTime( struct tm *pstCurrentTime, TIMEZONE_SELECT Timezone)
+{
+    bool blReturn = false;
+    uint8 pucTimeString[STRING_SIZE] = {0};
+    uint8 pucDateString[STRING_SIZE] = {0};
+    uint8 pucOutputString[MAX_STRING_SIZE] = {0};
+
+    if((pstCurrentTime != NULL) && 
+        (Timezone >= MIN_TIMEZONE) && 
+        (Timezone <= MAX_TIMEZONE))
+    {
+        appTimerConvertTimeToString(pstCurrentTime, 
+                                        pucDateString, 
+                                        pucTimeString);
+        sprintf((char*)pucOutputString, 
+                "Time : %s\r\nDate : %s\r\n", 
+                pucTimeString, 
+                pucDateString);
+        switch (Timezone)
+        {
+            case TIMEZONE_GMT:
+                consolePrint((uint8*)"UTC (0:00)\r\n-------------\r\n");
+                consolePrint(pucOutputString);
+                break;
+
+            case TIMEZONE_IST:
+                consolePrint((uint8*)"IST (+05:30)\r\n-------------\r\n");
+                consolePrint(pucOutputString);
+                consolePrint((uint8*)"\r\n");
+                break;
+
+            case TIMEZONE_PST:
+                consolePrint((uint8*)"PST (-07:00)\r\n-------------\r\n");
+                consolePrint(pucOutputString);
+                consolePrint((uint8*)"\r\n");
+                break;
+        
+            default:
+                consolePrint((uint8*)"Invalid Timezone format\r\n");
+                break;
+        }
+
+        blReturn = true;
+
+    }
+
+    return blReturn;
+    
+}
+
+//************************.appTimerEpochTImeDisplay.***************************
+//Purpose   : Print epoch time
+//Inputs    : ulSeconds - Epoch time
+//Outputs   : None 
+//Return    : true  - Epoch time printed
+//Return    : false - invalid argument
+//Notes     : None
+//*****************************************************************************
+bool appTimerEpochTImeDisplay(int32 ulSeconds)
+{
+    bool blReturn = false;
+    uint8 puEpochTimeString[STRING_SIZE] = {0};
+
+    if(ulSeconds != NULL_VALUE)
+    {
+        sprintf((char*)puEpochTimeString, "Epoch: %u\r\n\r\n", ulSeconds);
+        consolePrint(puEpochTimeString);
+        blReturn = true;
+    }
+
+    return blReturn;
+
 }
 
 // EOF

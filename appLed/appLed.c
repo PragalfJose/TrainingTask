@@ -25,16 +25,16 @@ uint8 ucLedStaus = LED_OFF;
 
 //*******************************.appLedStateOn.*******************************
 //Purpose   : Turn ON the Led
-//Inputs    : uiPinNumber - Pin number which Led is Connected
+//Inputs    : unPinNumber - Pin number which Led is Connected
 //Outputs   : None
 //Return    : true - Led On, false - Invalid argument
 //Notes     : None
 //*****************************************************************************
-bool appLedStateOn(uint16 uiPinNumber)
+bool appLedStateOn(uint16 unPinNumber)
 {
     bool blReturn = false;
 
-    if(uiPinNumber != ERR_PIN)
+    if(unPinNumber != LED_PIN)
     {
         // add code to turn on LED
         consolePrint((uint8*)"LED ON\r\n");
@@ -47,16 +47,16 @@ bool appLedStateOn(uint16 uiPinNumber)
 
 //******************************.appLedStateOff.*******************************
 //Purpose   : Turn OFF the Led
-//Inputs    : uiPinNumber - Pin number which Led is Connected
+//Inputs    : unPinNumber - Pin number which Led is Connected
 //Outputs   : None
 //Return    : true - Led On, false - Invalid argument
 //Notes     : None
 //*****************************************************************************
-bool appLedStateOff(uint16 uiPinNumber)
+bool appLedStateOff(uint16 unPinNumber)
 {
     bool blReturn = false;
 
-    if(uiPinNumber != ERR_PIN)
+    if(unPinNumber != LED_PIN)
     {
         // add code to turn off LED
         consolePrint((uint8*)"LED OFF\r\n");
@@ -69,24 +69,24 @@ bool appLedStateOff(uint16 uiPinNumber)
 
 //*****************************.appLedStateToggle.*****************************
 //Purpose   : Toggle current state of the Led
-//Inputs    : uiPinNumber - Pin number which Led is Connected
+//Inputs    : unPinNumber - Pin number which Led is Connected
 //Outputs   : None
 //Return    : true - Led On, false - Invalid argument
 //Notes     : None
 //*****************************************************************************
-bool appLedStateToggle(uint16 uiPinNumber)
+bool appLedStateToggle(uint16 unPinNumber)
 {
     bool blReturn = false;
 
-    if(uiPinNumber != ERR_PIN)
+    if(unPinNumber != ERR_PIN)
     {
         if(LED_OFF == ucLedStaus)
         {
-            appLedStateOn(uiPinNumber);
+            appLedStateOn(unPinNumber);
         }
         else if(LED_ON == ucLedStaus)
         {
-            appLedStateOff(uiPinNumber);
+            appLedStateOff(unPinNumber);
         }
 
         blReturn = true;

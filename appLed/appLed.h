@@ -30,9 +30,9 @@
 
 //**************************** Forward Declarations ***************************
 
-bool appLedStateOn(uint16 uiPinNumber);
-bool appLedStateOff(uint16 uiPinNumber);
-bool appLedStateToggle(uint16 uiPinNumber);
+bool appLedStateOn(uint16 unPinNumber);
+bool appLedStateOff(uint16 unPinNumber);
+bool appLedStateToggle(uint16 unPinNumber);
 
 #endif // _APP_LED_H
 // EOF

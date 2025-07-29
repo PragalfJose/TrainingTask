@@ -22,6 +22,12 @@
 #include "Console.h"
 
 //******************************* Global Types ********************************
+typedef enum 
+{
+    TIMEZONE_GMT,
+    TIMEZONE_IST,
+    TIMEZONE_PST
+} TIMEZONE_SELECT;
 
 //***************************** Global Constants ******************************
 #define NULL_VALUE              0
@@ -35,18 +41,22 @@
 #define IST_OFFSET              19800              //05hr 30 minutes to seconds
 // GMT - 07hr 00 minutes is PST
 #define PST_OFFSET              25200              //07hr 00 minutes to seconds
+#define MIN_TIMEZONE            0
+#define MAX_TIMEZONE            2
 
 //***************************** Global Variables ******************************
 
 //**************************** Forward Declarations ***************************
 
 bool appTimerGetEpochTime(uint32 *pulSeconds);
-bool appTimerGetGMTTime(uint32 pulSeconds);
-bool appTimerGetISTTime(uint32 pulSeconds);
-bool appTimerGetPSTTime(uint32 pulSeconds);
+bool appTimerGetGMTTime(uint32 ulSeconds);
+bool appTimerGetISTTime(uint32 ulSeconds);
+bool appTimerGetPSTTime(uint32 ulSeconds);
 bool appTimerConvertTimeToString(struct tm* pstCurrentTime,
                                  uint8 *pucCurrentDateString,
                                  uint8 *pucCurrentTimeString);
+bool appTimerDisplayTime( struct tm *pstCurrentTime, TIMEZONE_SELECT zone);
+bool appTimerEpochTImeDisplay(int32 ulSeconds);
 void appTimerDelay(int32 lSeconds);
 void appTimerProcessTime(void);
 
