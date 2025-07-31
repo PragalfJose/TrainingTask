@@ -83,11 +83,12 @@ bool appTimerGetGMTTime(uint32 ulSeconds)
 bool appTimerGetISTTime(uint32 ulSeconds)
 {
     bool blReturn = false;
-    uint32 ulTemperoryEpoch = 0;
-    struct tm *pstCurrentTime = NULL;
     
     if(ulSeconds != NULL_VALUE)
     {
+        uint32 ulTemperoryEpoch = 0;
+        struct tm *pstCurrentTime = NULL;
+    
         ulTemperoryEpoch = ulSeconds + IST_OFFSET;
         pstCurrentTime = gmtime((time_t*)&ulTemperoryEpoch);
 
@@ -113,11 +114,12 @@ bool appTimerGetISTTime(uint32 ulSeconds)
 bool appTimerGetPSTTime(uint32 ulSeconds)
 {
     bool blReturn = false;
-    uint32 ulTemperoryEpoch = 0;
-    struct tm *pstCurrentTime = NULL;
 
     if(ulSeconds != NULL_VALUE)
     {
+        uint32 ulTemperoryEpoch = 0;
+        struct tm *pstCurrentTime = NULL;
+
         ulTemperoryEpoch = ulSeconds - PST_OFFSET;
         pstCurrentTime = gmtime((time_t*)&ulTemperoryEpoch);
 
@@ -146,12 +148,13 @@ bool appTimerConvertTimeToString(struct tm* pstCurrentTime,
                                  uint8 *pucCurrentTimeString)
 {
     bool blReturn = false;
-    uint8 pucHourOffsetString[MIN_STRING_SIZE] = {0};
 
     if((pstCurrentTime != NULL) && 
        (pucCurrentDateString != NULL) && 
        (pucCurrentTimeString != NULL))
     {
+        uint8 pucHourOffsetString[MIN_STRING_SIZE] = {0};
+
         sprintf((char*)pucCurrentDateString, "%02d/%02d/%04d", 
                 pstCurrentTime->tm_mday, 
                 pstCurrentTime->tm_mon + MONTH_OFFSET, 
@@ -209,10 +212,11 @@ void appTimerDelay(int32 lSeconds)
 void appTimerProcessTime(void)
 {
     uint32 ulEpochSec = 0;
-    uint32 ulEpochTime = 0;
 
     if(appTimerGetEpochTime(&ulEpochSec))
     {
+        uint32 ulEpochTime = 0;
+
         ulEpochTime = ulEpochSec;
         appTimerGetGMTTime(ulEpochTime);
         appTimerGetISTTime(ulEpochTime);
@@ -232,14 +236,15 @@ void appTimerProcessTime(void)
 bool appTimerDisplayTime( struct tm *pstCurrentTime, TIMEZONE_SELECT Timezone)
 {
     bool blReturn = false;
-    uint8 pucTimeString[STRING_SIZE] = {0};
-    uint8 pucDateString[STRING_SIZE] = {0};
-    uint8 pucOutputString[MAX_STRING_SIZE] = {0};
 
     if((pstCurrentTime != NULL) && 
         (Timezone >= MIN_TIMEZONE) && 
         (Timezone <= MAX_TIMEZONE))
     {
+        uint8 pucTimeString[STRING_SIZE] = {0};
+        uint8 pucDateString[STRING_SIZE] = {0};
+        uint8 pucOutputString[MAX_STRING_SIZE] = {0};
+
         appTimerConvertTimeToString(pstCurrentTime, 
                                         pucDateString, 
                                         pucTimeString);
@@ -287,13 +292,14 @@ bool appTimerDisplayTime( struct tm *pstCurrentTime, TIMEZONE_SELECT Timezone)
 //Return    : false - invalid argument
 //Notes     : None
 //*****************************************************************************
-bool appTimerEpochTImeDisplay(int32 ulSeconds)
+bool appTimerEpochTImeDisplay(uint32 ulSeconds)
 {
     bool blReturn = false;
-    uint8 puEpochTimeString[STRING_SIZE] = {0};
 
     if(ulSeconds != NULL_VALUE)
     {
+        uint8 puEpochTimeString[STRING_SIZE] = {0};
+
         sprintf((char*)puEpochTimeString, "Epoch: %u\r\n\r\n", ulSeconds);
         consolePrint(puEpochTimeString);
         blReturn = true;
