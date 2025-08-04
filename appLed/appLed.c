@@ -19,9 +19,205 @@
 //***************************** Local Constants *******************************
 
 //***************************** Local Variables *******************************
+#ifdef _RPIBOARD
+struct gpiod_chip *spChip = NULL;      
+struct gpiod_line *spLine = NULL;
+#endif /* _RPIBOARD*/
+
 uint8 ucLedStaus = LED_OFF;
 
 //****************************** Local Functions ******************************
+
+#ifdef _RPIBOARD
+//*****************************.appLedRpiGpioInit.*****************************
+//Purpose   : Initialise Gpio chip and Line number
+//Inputs    : None
+//Outputs   : None
+//Return    : true - Success, false - Initialisation failed
+//Notes     : None
+//*****************************************************************************
+bool appLedRpiGpioInit(void)
+{
+    bool blReturn = false;
+
+    if(spChip == NULL && spLine == NULL)
+    {
+        bool blStatusFlag = false;
+
+        blStatusFlag = appLedRpiGetChipName();
+        if(blStatusFlag == true)
+        {
+            blStatusFlag = appLedRpiGetLineNumber();
+            if(blStatusFlag == true)
+            {
+                blReturn = true;
+            }
+            else
+            {
+                appLedRpiReleaseChip();
+                consolePrint((uint8*)"Pin Allocation failed\r\n");
+            }
+        }
+        else
+        {
+            consolePrint((uint8*)"Chip Allocation failed\r\n");
+        }
+    }
+
+    return blReturn;
+
+}
+
+//***************************.appLedRpiGetChipName.****************************
+//Purpose   : Get details of GPIO chip
+//Inputs    : None
+//Outputs   : None
+//Return    : true - Success, false - Chip open failed
+//Notes     : Open a corresponding GPIO chip and returns its address
+//*****************************************************************************
+bool appLedRpiGetChipName(void)
+{
+    bool blReturn = false;
+
+    spChip = gpiod_chip_open_by_name(GPIO_CHIP);
+    if(spChip != NULL)
+    {
+        blReturn = true;
+    }
+
+    return blReturn;
+
+}
+
+//**************************.appLedRpiGetLineNumber.***************************
+//Purpose   : Get details of GPIO pin 
+//Inputs    : None
+//Outputs   : None
+//Return    : true - Success, false - Get line number failed
+//Notes     : Open a GPIO line and return its address
+//*****************************************************************************
+bool appLedRpiGetLineNumber(void)
+{
+    bool blReturn = false;
+
+    spLine = gpiod_chip_get_line(spChip, GPIO_PIN);
+    if(spLine != NULL)
+    {
+        blReturn = true;
+    }
+
+    return blReturn;
+
+}
+
+//**************************.appLedRpiReleaseChip.*****************************
+//Purpose   : Clear given GPIO chip 
+//Inputs    : None
+//Outputs   : None
+//Return    : true - GPIO chip released, false - Failed
+//Notes     : Relase a GPIO chip and its allocated resources
+//*****************************************************************************
+bool appLedRpiReleaseChip(void)
+{
+    bool blReturn = false;
+
+    if(spChip != NULL)
+    {
+        gpiod_chip_close(spChip);
+        blReturn = true;
+    }
+
+    return blReturn;
+}
+
+//**************************.appLedRpiSetGpioOutput.***************************
+//Purpose   : Set direction of given GPIO pin to output
+//Inputs    : unPinNumber - pin number
+//Outputs   : None
+//Return    : true - GPIO direction Set, false - Failed
+//Notes     : None
+//*****************************************************************************
+bool appLedRpiSetGpioOutput(uint16 unPinNumber)
+{
+    bool blReturn = false;
+
+    if((spChip != NULL) && (spLine != NULL) && (GPIO_PIN == unPinNumber))
+    {
+        gpiod_line_release(spLine);
+        if(RETURN_OK == gpiod_line_request_output(spLine, GPIO_NAME, TRUE))
+        {
+            blReturn = true;
+        }
+    }
+    else
+    {
+        consolePrint((uint8*)"Invalid Parameters GPIO SET OUTPUT\r\n");
+    }
+
+    return blReturn;
+}
+
+//***************************.appLedRpiSetGpioPin.*****************************
+//Purpose   : Set given GPIO pin
+//Inputs    : unPinNumber - pin number
+//Outputs   : None
+//Return    : true - GPIO Set, false - Failed
+//Notes     : None
+//*****************************************************************************
+bool appLedRpiSetGpioPin(uint16 unPinNumber)
+{
+    bool blReturn = false;
+
+    if((spChip != NULL) && (spLine != NULL) && (GPIO_PIN == unPinNumber))
+    {
+        if(RETURN_OK == gpiod_line_set_value(spLine, TRUE))
+        {
+            blReturn = true;
+        }
+        else
+        {
+            consolePrint((uint8*)"Led ON failed\r\n");
+        }
+    }
+    else
+    {
+        consolePrint((uint8*)"Invalid Parameters GPIO SET PIN\r\n");
+    }
+
+    return blReturn;
+}
+
+//**************************.appLedRpiClearGpioPin.****************************
+//Purpose   : Clear given GPIO pin 
+//Inputs    : unPinNumber - pin number
+//Outputs   : None
+//Return    : true - GPIO Clear, false - Failed
+//Notes     : None
+//*****************************************************************************
+bool appLedRpiClearGpioPin(uint16 unPinNumber)
+{
+    bool blReturn = false;
+
+    if((spChip != NULL) && (spLine != NULL) && (GPIO_PIN == unPinNumber))
+    {
+        if(RETURN_OK == gpiod_line_set_value(spLine, FALSE))
+        {
+            blReturn = true;
+        }
+        else
+        {
+            consolePrint((uint8*)"Led OFF failed\r\n");
+        }
+    }
+    else
+    {
+        consolePrint((uint8*)"Invalid Parameters GPIO CLEAR PIN\r\n");
+    }
+
+    return blReturn;
+}
+
+#endif /* _RPIBOARD*/
 
 //*******************************.appLedStateOn.*******************************
 //Purpose   : Turn ON the Led
@@ -34,9 +230,11 @@ bool appLedStateOn(uint16 unPinNumber)
 {
     bool blReturn = false;
 
-    if(unPinNumber != LED_PIN)
+    if(LED_PIN == unPinNumber)
     {
-        // add code to turn on LED
+        #ifdef _RPIBOARD
+        appLedRpiSetGpioPin(unPinNumber);
+        #endif /*_RPIBOARD*/
         consolePrint((uint8*)"LED ON\r\n");
         ucLedStaus = LED_ON;
         blReturn = true;
@@ -56,9 +254,11 @@ bool appLedStateOff(uint16 unPinNumber)
 {
     bool blReturn = false;
 
-    if(unPinNumber != LED_PIN)
+    if(LED_PIN == unPinNumber)
     {
-        // add code to turn off LED
+        #ifdef _RPIBOARD
+        appLedRpiClearGpioPin(unPinNumber);
+        #endif /*_RPIBOARD*/
         consolePrint((uint8*)"LED OFF\r\n");
         ucLedStaus = LED_OFF;
         blReturn = true;
@@ -78,18 +278,24 @@ bool appLedStateToggle(uint16 unPinNumber)
 {
     bool blReturn = false;
 
-    if(unPinNumber != ERR_PIN)
+    if(LED_PIN == unPinNumber)
     {
         if(LED_OFF == ucLedStaus)
         {
-            appLedStateOn(unPinNumber);
+            blReturn = appLedStateOn(unPinNumber);
+            if(blReturn == false)
+            {
+                consolePrint((uint8*)"LED ON Failed\r\n");
+            }
         }
         else if(LED_ON == ucLedStaus)
         {
-            appLedStateOff(unPinNumber);
+            blReturn = appLedStateOff(unPinNumber);
+            if(blReturn == false)
+            {
+                consolePrint((uint8*)"LED OFF Failed\r\n");
+            }
         }
-
-        blReturn = true;
     }
 
     return blReturn;

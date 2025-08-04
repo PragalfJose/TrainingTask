@@ -34,13 +34,36 @@
 //*****************************************************************************
 int main()
 {
+    #ifdef _RPIBOARD
+    bool bReturnStatus = false;
+    
+    bReturnStatus = appLedRpiGpioInit();
+    if(bReturnStatus == false)
+    {
+        consolePrint((uint8*)"GPIO Initialistion Failed\r\n");
+    }
+    else
+    {
+        bReturnStatus = appLedRpiSetGpioOutput(LED_PIN);
+        if(bReturnStatus == false)
+        {
+            consolePrint((uint8*)"GPIO Direction set Failed\r\n");
+        }
+    }
+    #endif /*_RPIBOARD*/
 
     while(true)
     {
         appTimerProcessTime();
-        appLedStateToggle(LED_PIN);
-        appTimerDelay(1);
+        appLedStateOn(LED_PIN);
+        appTimerDelay(840);
+        appLedStateOff(LED_PIN);
+        appTimerDelay(532);
     }
+
+    #ifdef _RPIBOARD
+    appLedRpiReleaseChip();
+    #endif /*_RPIBOARD*/
 
     return 0;
     

@@ -13,6 +13,8 @@ INCDIR = . appTimer appLed Console Common
 # DEPFLAGS = -MP -MD  $(DEPFLAGS)
 # Flags with include path
 CFLAGS = -Wall -Werror -Wextra $(foreach D,$(INCDIR),-I$(D))
+RPI_FLAGS = -I system -D_RPIBOARD
+RPI_LIBS = -L system/lib -lgpiod
 
 # Make a list of C source files in project
 # foreach will iterate through SUBDIR and find all .c file
@@ -94,7 +96,13 @@ CreateDebug :
 	mkdir -p Debug
 
 Rpi : CreateRelease
-	$(CROSS_CC) $(CFLAGS) $(SOURCE) -o Release/RpiRelease.exe
+	$(CROSS_CC)	\
+	$(CFLAGS)	\
+	$(RPI_FLAGS)	\
+	$(SOURCE)	\
+	$(RPI_LIBS)	\
+	-o Release/ProjectRpi
+
 # Clean is needed to clean everything 
 # Includes rules to remove and clear
 .PHONY = clean

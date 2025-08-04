@@ -57,7 +57,7 @@ bool appTimerConvertTimeToString(struct tm* pstCurrentTime,
                                  uint8 *pucCurrentTimeString);
 bool appTimerDisplayTime( struct tm *pstCurrentTime, TIMEZONE_SELECT zone);
 bool appTimerEpochTImeDisplay(uint32 ulSeconds);
-void appTimerDelay(int32 lSeconds);
+void appTimerDelay(int32 lmilSeconds);
 void appTimerProcessTime(void);
 
 #endif // _APP_TIMER_H

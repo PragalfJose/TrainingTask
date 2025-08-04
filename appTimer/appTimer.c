@@ -54,17 +54,29 @@ bool appTimerGetEpochTime(uint32 *pulSeconds)
 bool appTimerGetGMTTime(uint32 ulSeconds)
 {
     bool blReturn = false;
-    struct tm *pstCurrentTime = NULL;
 
     if(ulSeconds != NULL_VALUE)
     {
-        pstCurrentTime = gmtime((time_t*)(&ulSeconds));
-
+        uint32 ulTemperoryEpoch = 0;
+        struct tm *pstCurrentTime = NULL;
+    
+        ulTemperoryEpoch = ulSeconds;
+        pstCurrentTime = gmtime((time_t*)&ulTemperoryEpoch);
         if(pstCurrentTime != NULL)
         {
-            appTimerDisplayTime(pstCurrentTime, TIMEZONE_GMT);
-            appTimerEpochTImeDisplay(ulSeconds);
-            blReturn = true;
+            blReturn = appTimerDisplayTime(pstCurrentTime, TIMEZONE_GMT);
+            if(blReturn == false)
+            {
+                consolePrint((uint8*)"GMT Time print failed\r\n");
+            }
+            else
+            {
+                appTimerEpochTImeDisplay(ulSeconds);
+            }
+        }
+        else
+        {
+            consolePrint((uint8*)"Epoch time conversion Failed : GMT\r\n");
         }
     }
 
@@ -91,11 +103,17 @@ bool appTimerGetISTTime(uint32 ulSeconds)
     
         ulTemperoryEpoch = ulSeconds + IST_OFFSET;
         pstCurrentTime = gmtime((time_t*)&ulTemperoryEpoch);
-
         if((pstCurrentTime != NULL))
         {
-            appTimerDisplayTime(pstCurrentTime, TIMEZONE_IST);
-            blReturn = true;
+            blReturn = appTimerDisplayTime(pstCurrentTime, TIMEZONE_IST);
+            if(blReturn == false)
+            {
+                consolePrint((uint8*)"IST Time print failed\r\n");
+            }
+        }
+        else
+        {
+            consolePrint((uint8*)"Epoch time conversion Failed : IST\r\n");
         }
     }
 
@@ -122,11 +140,17 @@ bool appTimerGetPSTTime(uint32 ulSeconds)
 
         ulTemperoryEpoch = ulSeconds - PST_OFFSET;
         pstCurrentTime = gmtime((time_t*)&ulTemperoryEpoch);
-
         if((pstCurrentTime != NULL))
         {
-            appTimerDisplayTime(pstCurrentTime, TIMEZONE_PST);
-            blReturn = true;
+            blReturn = appTimerDisplayTime(pstCurrentTime, TIMEZONE_PST);
+            if(blReturn == false)
+            {
+                consolePrint((uint8*)"PST Time print failed\r\n");
+            }
+        }
+        else
+        {
+            consolePrint((uint8*)"Epoch time conversion Failed : PST\r\n");
         }
     }
 
@@ -185,17 +209,17 @@ bool appTimerConvertTimeToString(struct tm* pstCurrentTime,
 
 //****************************.appTimerDelay.**********************************
 //Purpose   : Create a dealy
-//Inputs    : ulSeconds - Delay needed in Seconds
+//Inputs    : lmilSeconds - Delay needed in milliSeconds
 //Outputs   : None 
 //Return    : None
 //Notes     : None
 //*****************************************************************************
-void appTimerDelay(int32 lSeconds)
+void appTimerDelay(int32 lmilSeconds)
 {
     int32 lStartTime = 0;
     lStartTime = clock();
 
-    while ((clock()) < ((lStartTime) + (lSeconds * CLOCKS_PER_SEC)))
+    while ((clock()) < ((lStartTime) + (lmilSeconds * CLOCKS_PER_SEC/1000)))
     {
 
     }
@@ -216,11 +240,30 @@ void appTimerProcessTime(void)
     if(appTimerGetEpochTime(&ulEpochSec))
     {
         uint32 ulEpochTime = 0;
+        bool blReturnValue = false;
 
         ulEpochTime = ulEpochSec;
-        appTimerGetGMTTime(ulEpochTime);
-        appTimerGetISTTime(ulEpochTime);
-        appTimerGetPSTTime(ulEpochTime);
+        blReturnValue = appTimerGetGMTTime(ulEpochTime);
+        if(blReturnValue == false)
+        {
+            consolePrint((uint8*)"GMT Time zone Failed\r\n");
+        }
+
+        blReturnValue = appTimerGetISTTime(ulEpochTime);
+        if(blReturnValue == false)
+        {
+            consolePrint((uint8*)"IST Time zone Failed\r\n");
+        }
+
+        blReturnValue = appTimerGetPSTTime(ulEpochTime);
+        if(blReturnValue == false)
+        {
+            consolePrint((uint8*)"PST Time zone Failed\r\n");
+        }
+    }
+    else
+    {
+        consolePrint((uint8*)"Epoch Time fetch failed\r\n");
     }
 }
 

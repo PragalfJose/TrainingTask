@@ -26,6 +26,10 @@ typedef long long               int64;
 typedef unsigned long long      uint64;
 
 //***************************** Global Constants ******************************
+#define RETURN_OK               0
+#define ERROR_VALUE             -1
+#define TRUE                    1
+#define FALSE                   0
 
 //***************************** Global Variables ******************************
 

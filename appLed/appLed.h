@@ -15,24 +15,44 @@
 
 //******************************* Include Files *******************************
 #include <stdbool.h>
-#include "Common.h"
+#ifdef _RPIBOARD
+#include <gpiod.h>
+#endif /*_RPIBOARD*/
+
 #include "Console.h"
+#include "Common.h"
 
 //******************************* Global Types ********************************
 
 //***************************** Global Constants ******************************
 #define LED_ON                  1
 #define LED_OFF                 0
-#define ERR_PIN                 0
-#define LED_PIN                 15               // Connected pin number
+#define LED_PIN                 21               // Connected pin number
+#ifdef _RPIBOARD
+#define GPIO_NAME               "Rpi_Blinky"
+#define GPIO_CHIP               "gpiochip0"
+#define GPIO_PIN                21
+#endif /*_RPIBOARD*/
 
 //***************************** Global Variables ******************************
 
-//**************************** Forward Declarations ***************************
+//**************************** Function Declarations **************************
+
+#ifdef _RPIBOARD
+bool appLedRpiGpioInit(void);
+bool appLedRpiGetChipName(void);
+bool appLedRpiGetLineNumber(void);
+bool appLedRpiReleaseChip(void);
+bool appLedRpiSetGpioOutput(uint16 unPinNumber);
+bool appLedRpiSetGpioPin(uint16 unPinNumber);
+bool appLedRpiClearGpioPin(uint16 unPinNumber);
+#endif /*_RPIBOARD*/
 
 bool appLedStateOn(uint16 unPinNumber);
 bool appLedStateOff(uint16 unPinNumber);
 bool appLedStateToggle(uint16 unPinNumber);
+
+//*********************** Inline Method Implementations ***********************
 
 #endif // _APP_LED_H
 // EOF
