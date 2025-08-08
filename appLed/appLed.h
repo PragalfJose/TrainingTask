@@ -29,9 +29,11 @@
 #define LED_OFF                 0
 #define LED_PIN                 21               // Connected pin number
 #ifdef _RPIBOARD
-#define GPIO_NAME               "Rpi_Blinky"
+#define LED_NAME                "Rpi_Led"
+#define SW_NAME                 "Rpi_Switch"
 #define GPIO_CHIP               "gpiochip0"
-#define GPIO_PIN                21
+#define GPIO_LED                21
+#define GPIO_SWITCH             21
 #endif /*_RPIBOARD*/
 
 //***************************** Global Variables ******************************
@@ -44,8 +46,10 @@ bool appLedRpiGetChipName(void);
 bool appLedRpiGetLineNumber(void);
 bool appLedRpiReleaseChip(void);
 bool appLedRpiSetGpioOutput(uint16 unPinNumber);
+bool appLedRpiSetGpioInput(uint16 unPinNumber);
 bool appLedRpiSetGpioPin(uint16 unPinNumber);
 bool appLedRpiClearGpioPin(uint16 unPinNumber);
+bool appLedRpiCheckGpioPin(uint16 unPinNumber);
 #endif /*_RPIBOARD*/
 
 bool appLedStateOn(uint16 unPinNumber);

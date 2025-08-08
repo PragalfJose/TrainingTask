@@ -6,13 +6,21 @@ CC = gcc
 CROSS_CC = aarch64-linux-gnu-${CC}
 
 # List of all sub directories
-SUBDIR = . appTimer appLed Console
+SUBDIR = . appTimer appLed Console fileHandler possixHandler possixOperation
 # List of all include directories with header file
-INCDIR = . appTimer appLed Console Common
+INCDIR = .	\
+		appTimer	\
+		appLed	\
+		Console	\
+		fileHandler	\
+		possixOperation	\
+		possixHandler	\
+		Common
 # Dependency Flags
 # DEPFLAGS = -MP -MD  $(DEPFLAGS)
 # Flags with include path
 CFLAGS = -Wall -Werror -Wextra $(foreach D,$(INCDIR),-I$(D))
+MAPFLAG = -Wl,-Map=ProjectConsole.map
 RPI_FLAGS = -I system -D_RPIBOARD
 RPI_LIBS = -L system/lib -lgpiod
 
@@ -31,7 +39,7 @@ DEPND_FILES = $(patsubst %.c,%.d,$(SOURCE_FILES))
 # Create assembly file List
 ASSEMBLY_FILES = $(patsubst %.c,Release/%.s,$(file_names))
 
-VPATH = .:appTimer:appLed:Console:Common
+VPATH = .:appTimer:appLed:Console:Common:fileHandler:possixHandler:possixOperation
 
 # Target : Dependencies
 # Specify the rule for Dependencies
@@ -85,7 +93,8 @@ Debug : CreateDebug
 
 # Need to define rules for Executable
 Executable : $(SOURCE) CreateRelease
-	$(CC) $(CFLAGS) $(SOURCE) -o Release/LinuxRelease.exe
+	$(CC) $(CFLAGS) $(SOURCE) $(MAPFLAG) -o Release/LinuxRelease
+	size Release/LinuxRelease
 
 # Create folder named Release using mkdir
 CreateRelease :
@@ -112,6 +121,7 @@ clean :
 	find . -type f -name "*.d" -delete
 	find . -type f -name "*.s" -delete
 	find . -type f -name "*.exe" -delete
+	find . -type f -name "*.map" -delete
 	rm -r Release
 	rm -r Debug
 	

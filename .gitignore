@@ -1,7 +1,10 @@
 *.exe
 *.o
 *.s
+*.map
+*.txt
 .vscode/
+ProjectConsole
 main
 LedToggle
 Release
